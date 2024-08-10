@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Insurance Policy Management</title>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h2>Insurance Policy Table</h2>
+    
+    <a th:href="@{showFormForAdd}"
+class="btn btn-primary btn-sm mb-3">
+
+Add PolicyHolder
+</a>
+<form th:action="@{/policies/search}" class="form-inline">
+	
+<input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="policyHolder" placeholder="Search by name" />
+
+		<button class="btn btn-success mb-3" type="submit">Search</button>
+
+</form>
+    
+    
+    
+    
+     <table class="table">
+        <thead>
+            <tr>
+                <th>PolicyHolder</th>
+                <th>PolicyType</th>
+                <th>PremiumAmount</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="policy : ${policies}">
+                <td th:text="${policy.policyHolder}"></td>
+                <td th:text="${policy.policyType}"></td>
+                <td th:text="${policy.premiumAmount}"></td>
+                <td>
+                    <a th:href="@{/policies/updatePolicy(id=${policy.id})}"
+                            class="btn btn-info btn-sm">Edit</a>
+                        <a th:href="@{/policies/deletePolicy(id=${policy.id})}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete the policy?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+	
+</body>
+</html>
